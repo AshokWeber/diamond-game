@@ -19,8 +19,11 @@ for (var r=0; r<8; r++) {
 count = 1;
 $(".diamondBox").click(function(){
 	$(this).find('img').css("visibility","visible");
-	$(this).addClass('clicked');
+	$(this).removeClass('diamondBox').addClass('clicked');
 	$(this).off("click");
+	if($(this).next().is('.hintBox') || $(this).prev().is('.hintBox')){
+		$(".hintBox").text('');
+	}
 		count ++;
 		if(count > 8){
 			var ClickedDiv = $('.clicked').length;
