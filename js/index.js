@@ -33,7 +33,20 @@ $(".diamondBox").click(function(){
 });
 
 $(".defaultBox").click(function(){
-	$(this).text('X');
+
+	if($(this).next().is('.diamondBox')){
+		$(".hintBox").text('');
+		$(this).text('->');
+		$(this).addClass('hintBox');
+		$(this).next().removeClass('diamondBox');
+	}
+	else if($(this).prev().is('.diamondBox')){
+		$(".hintBox").text('');
+		$(this).text('<-');
+		$(this).addClass('hintBox');
+		$(this).prev().removeClass('diamondBox');
+	}
+	else{$(this).text('');}
 	$(this).addClass('clicked');
 	$(this).off("click");
 });
