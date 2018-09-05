@@ -2,15 +2,38 @@ var space = 1;
 for (var r=0; r<8; r++) {
   var col = "";
   var get_val = Math.floor(Math.random() * 8);
+  var img = new Image();
+  img.src = 'diamond.svg';
   for (var c=0; c<8; c++) { 
   	 if(get_val === c){
-  	 	col += "<td data-pos='"+space+"'><span>1</span></td>";
+  	 	col += "<td data-pos='"+space+"' class='diamondBox'><div><span>?</span><img src='"+img.src+"'></div></td>";
  	}
  	else{
- 		col += "<td data-pos='"+space+"'></td>";
+ 		col += "<td data-pos='"+space+"' class='defaultBox'><div><span>?</span></div></td>";
  	}
 
      space++; 
   }
   $("#chessboard").append("<tr>"+col+"</tr>");
 }
+count = 1;
+$(".diamondBox").click(function(){
+	$(this).find('img').css("visibility","visible");
+	$(this).addClass('clicked');
+	$(this).off("click");
+		count ++;
+		if(count > 8){
+			var ClickedDiv = $('.clicked').length;
+			var result = 64 - ClickedDiv;
+			$("h1").text("Congratulations !! You have unlocked all the 8 Diamonds !!")
+			$(".finalScore").text(result);
+			$(".results").show();
+			window.location.hash = 'show';
+	}
+});
+
+$(".defaultBox").click(function(){
+	$(this).text('X');
+	$(this).addClass('clicked');
+	$(this).off("click");
+});
